@@ -215,7 +215,7 @@ const LandingPage = () => {
               {/* main card */}
               <motion.div
                 variants={fadeUp}
-                className="relative h-full rounded-2xl border border-white/15 bg-[#0B1020]/80 backdrop-blur-md shadow-2xl overflow-hidden"
+                className="relative h-max rounded-2xl border border-white/15 bg-[#0B1020]/80 backdrop-blur-md shadow-2xl overflow-hidden"
                 {...float(0.2)}
               >
                 {/* Header bar */}

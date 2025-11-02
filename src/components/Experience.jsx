@@ -107,9 +107,7 @@ export function Experience() {
                         <FiTrendingUp className="w-6 h-6 text-white" />
                       </div>
                       <div>
-                        <p className="text-2xl font-bold text-white">
-                          {totalProjects}+
-                        </p>
+                        <p className="text-2xl font-bold text-white">12+</p>
                         <p className="text-slate-400 text-sm">Key Projects</p>
                       </div>
                     </div>
@@ -142,8 +140,8 @@ export function Experience() {
                     whileTap={{ scale: 0.98 }}
                     className="mt-4 w-full px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-medium rounded-lg transition-all duration-300 flex items-center justify-center gap-2"
                   >
-                    <BsLightning className="w-4 h-4" />
-                    Hire Me
+                    <BsLightning className="w-4 h-4" />{" "}
+                    <a href="#contact"> Hire Me</a>
                   </motion.button>
                 </motion.div>
               </div>

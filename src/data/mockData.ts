@@ -57,24 +57,26 @@ export const projects = [
 export const experiences = [
   {
     id: 1,
-    title: "System Administrator",
-    company: "Paisa4You",
-    duration: "2022 - Present",
+    title: "Full Stack Developer",
+    company: "Anarish Innovations",
+    duration: "Nov 2025 - Present",
     responsibilities: [
-      "Managed and maintained server infrastructure",
-      "Implemented security protocols and backup systems",
-      "Optimized system performance and uptime"
+      "Leading full-stack web application development using modern technologies",
+      "Managing and maintaining server infrastructure and API integrations",
+      "Implementing security protocols, data backup systems, and performance optimization",
+      "Collaborating with the design and product teams to deliver scalable solutions"
     ]
   },
   {
     id: 2,
-    title: "Android Developer",
-    company: "RSL",
-    duration: "2020 - 2022",
+    title: "Full Stack Developer",
+    company: "Loanyfy.com",
+    duration: "June 2024 - Nov 2025",
     responsibilities: [
-      "Developed native Android applications",
-      "Collaborated with cross-functional teams",
-      "Implemented UI/UX designs and app features"
+      "Developed and maintained responsive web applications using the MERN stack",
+      "Collaborated with cross-functional teams to design and deliver new features",
+      "Implemented user authentication, API integrations, and data management modules",
+      "Contributed to enhancing UI/UX for improved user engagement"
     ]
   }
 ];

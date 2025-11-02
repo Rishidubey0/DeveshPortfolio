@@ -69,7 +69,7 @@ export function About() {
               <div className="absolute inset-0 rounded-3xl ring-1 ring-inset ring-white/10"></div>
             </div>
 
-            {/* Floating Info Badge (Optional - shows on hover) */}
+            {/* Floating Info Badge */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -120,7 +120,7 @@ export function About() {
             transition={{ duration: 0.6 }}
             className="text-white"
           >
-            <h3 className="mb-6 text-white text-2xl font-semibold">
+            <h3 className="mb-6 text-white text-3xl font-semibold">
               Passionate Developer, Creative Problem Solver
             </h3>
             <p className="mb-6 text-slate-300 text-base leading-relaxed">
@@ -153,14 +153,17 @@ export function About() {
               ))}
             </div>
 
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-medium rounded-lg shadow-lg shadow-indigo-500/50 hover:shadow-indigo-500/70 transition-all duration-300"
-            >
-              <FiDownload className="w-4 h-4" />
-              <a href="/MohdShoaib_CV.pdf"> Download CV</a>
-            </motion.button>
+            {/* Download CV Button - Fixed */}
+            <a href="/MohdShoaib_CV.pdf" download className="inline-block">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-medium rounded-lg shadow-lg shadow-indigo-500/50 hover:shadow-indigo-500/70 transition-all duration-300"
+              >
+                <FiDownload className="w-4 h-4" />
+                Download CV
+              </motion.button>
+            </a>
           </motion.div>
         </div>
       </div>

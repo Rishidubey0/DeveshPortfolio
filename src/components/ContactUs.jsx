@@ -34,14 +34,14 @@ export function Contact() {
     {
       icon: HiMail,
       label: "Email",
-      value: "khanbhaishoaib107@gmail.com",
-      link: "mailto:khanbhaishoaib107@gmail.com",
+      value: "contact@mohammadshoaibkhan.com",
+      link: "mailto:contact@mohammadshoaibkhan.com",
     },
     {
       icon: HiPhone,
       label: "Phone",
-      value: "+91 XXXXX XXXXX",
-      link: "tel:+91XXXXXXXXXX",
+      value: "+91 73102 49234",
+      link: "tel:+917310249234",
     },
     {
       icon: HiLocationMarker,
@@ -55,20 +55,14 @@ export function Contact() {
     {
       icon: FaGithub,
       label: "GitHub",
-      link: "https://github.com/your-username",
+      link: "https://github.com/mohdshoaibkhan72",
       color: "hover:bg-gray-700",
     },
     {
       icon: FaLinkedin,
       label: "LinkedIn",
-      link: "https://www.linkedin.com/in/your-handle",
+      link: "https://www.linkedin.com/in/mohdshoaibkhan72",
       color: "hover:bg-blue-600",
-    },
-    {
-      icon: FaTwitter,
-      label: "Twitter",
-      link: "https://twitter.com/your-handle",
-      color: "hover:bg-sky-500",
     },
   ];
 

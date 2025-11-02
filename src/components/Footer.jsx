@@ -9,25 +9,20 @@ export function Footer() {
     {
       icon: FaGithub,
       label: "GitHub",
-      link: "https://github.com/your-username",
+      link: "https://github.com/mohdshoaibkhan72",
       color: "hover:bg-gray-700",
     },
     {
       icon: FaLinkedin,
       label: "LinkedIn",
-      link: "https://www.linkedin.com/in/your-handle",
+      link: "https://www.linkedin.com/in/shoaibkhan72/",
       color: "hover:bg-blue-600",
     },
-    {
-      icon: FaTwitter,
-      label: "Twitter",
-      link: "https://twitter.com/your-handle",
-      color: "hover:bg-sky-500",
-    },
+
     {
       icon: HiMail,
       label: "Email",
-      link: "mailto:khanbhaishoaib107@gmail.com",
+      link: "mailto:contact@mohammadshoaibkhan.com",
       color: "hover:bg-red-500",
     },
   ];

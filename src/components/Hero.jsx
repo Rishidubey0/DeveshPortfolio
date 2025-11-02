@@ -119,7 +119,7 @@ const LandingPage = () => {
                   </button>
                 </a>
                 <a
-                  href="/resume.pdf"
+                  href="/MohdShoaib_CV.pdf"
                   download
                   aria-label="Download resume PDF"
                   className="rounded-md border border-transparent px-6 py-3 text-sm font-semibold text-indigo-200 hover:text-white focus:outline-none focus-visible:ring ring-indigo-500"
@@ -146,7 +146,7 @@ const LandingPage = () => {
 
                 {/* GitHub */}
                 <a
-                  href="https://github.com/your-username"
+                  href="https://github.com/mohdshoaibkhan72"
                   target="_blank"
                   rel="noreferrer"
                   aria-label="GitHub"
@@ -167,7 +167,7 @@ const LandingPage = () => {
 
                 {/* LinkedIn */}
                 <a
-                  href="https://www.linkedin.com/in/your-handle"
+                  href="https://www.linkedin.com/in/shoaibkhan72/"
                   target="_blank"
                   rel="noreferrer"
                   aria-label="LinkedIn"
@@ -186,30 +186,9 @@ const LandingPage = () => {
                   </svg>
                 </a>
 
-                {/* Twitter/X */}
-                <a
-                  href="https://twitter.com/your-handle"
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label="Twitter"
-                  title="Twitter"
-                  className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-slate-300/60 
-               bg-slate-900/40 text-slate-200 transition-all duration-200 
-               group-hover:text-white hover:bg-white/15"
-                >
-                  <svg
-                    viewBox="0 0 24 24"
-                    className="h-5 w-5"
-                    fill="currentColor"
-                    aria-hidden="true"
-                  >
-                    <path d="M21.5 6.83c-.63.28-1.3.47-2 .56a3.49 3.49 0 0 0 1.53-1.92c-.67.4-1.41.7-2.2.86a3.48 3.48 0 0 0-5.94 3.17 9.88 9.88 0 0 1-7.17-3.64 3.48 3.48 0 0 0 1.07 4.64c-.54-.02-1.06-.17-1.5-.42v.04c0 1.7 1.21 3.12 2.82 3.45-.3.08-.61.12-.94.12-.23 0-.45-.02-.66-.06.45 1.41 1.76 2.43 3.3 2.46a6.98 6.98 0 0 1-4.32 1.49c-.28 0-.55-.02-.81-.05A9.86 9.86 0 0 0 9.08 20c6.5 0 10.06-5.39 10.06-10.06l-.01-.46c.69-.5 1.28-1.12 1.76-1.82Z" />
-                  </svg>
-                </a>
-
                 {/* Email */}
                 <a
-                  href="mailto:khanbhaishoaib107@gmail.com"
+                  href="mailto:contact@mohammadshoaibkhan.com"
                   aria-label="Email"
                   title="Email"
                   className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-slate-300/60 
@@ -371,7 +350,7 @@ const LandingPage = () => {
 
               {/* extra floating badge for depth */}
               <motion.div
-                className="absolute -right-2 -top-2 rounded-xl bg-gradient-to-r from-indigo-500 to-cyan-500 px-3 py-2 text-[11px] font-semibold text-white shadow-xl"
+                className="absolute -right-2 -top-6 rounded-xl bg-gradient-to-r from-indigo-500 to-cyan-500 px-3 py-2 text-[11px] font-semibold text-white shadow-xl"
                 {...float(0.6)}
               >
                 Developer Mode

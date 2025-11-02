@@ -45,25 +45,71 @@ export function About() {
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
-          {/* Left - Image */}
+          {/* Left - Professional Image with Enhanced Effects */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="relative"
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="relative group"
           >
-            <div className="relative rounded-2xl overflow-hidden border border-white/10 backdrop-blur-lg bg-white/5">
+            {/* Main Image Container */}
+            <div className="relative rounded-3xl overflow-hidden border border-white/20 backdrop-blur-xl bg-gradient-to-br from-white/10 to-white/5 shadow-2xl">
               <img
-                src="https://images.unsplash.com/photo-1737575655055-e3967cbefd03?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBkZXZlbG9wZXIlMjBwb3J0cmFpdHxlbnwxfHx8fDE3NjE5NDc4NDh8MA&ixlib=rb-4.1.0&q=80&w=1080"
-                alt="Mohammad Shoaib Khan"
-                className="w-full h-auto rounded-2xl"
+                src="/aiimg1.png"
+                alt="Mohammad Shoaib Khan - Full Stack Developer"
+                className="w-full h-auto rounded-3xl transform transition-transform duration-700 group-hover:scale-105"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-indigo-900/40 via-transparent to-transparent rounded-2xl"></div>
+
+              {/* Multi-layer gradient overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-indigo-950/60 via-purple-900/20 to-transparent rounded-3xl"></div>
+              <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-indigo-900/30 rounded-3xl"></div>
+
+              {/* Subtle inner glow */}
+              <div className="absolute inset-0 rounded-3xl ring-1 ring-inset ring-white/10"></div>
             </div>
 
-            {/* Decorative glassmorphism element */}
-            <div className="absolute -bottom-6 -right-6 w-48 h-48 bg-gradient-to-br from-indigo-500/30 to-purple-600/30 rounded-2xl backdrop-blur-xl border border-white/10 -z-10"></div>
+            {/* Floating Info Badge (Optional - shows on hover) */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4, duration: 0.6 }}
+              className="absolute -bottom-4 left-6 right-6 bg-gradient-to-r from-indigo-600/90 to-purple-600/90 backdrop-blur-xl rounded-2xl p-4 border border-white/20 shadow-xl"
+            >
+              <div className="flex items-center justify-between text-white">
+                <div>
+                  <p className="text-sm font-medium opacity-90">
+                    Full Stack Developer
+                  </p>
+                  <p className="text-xs opacity-70 mt-0.5">
+                    MERN Stack Specialist
+                  </p>
+                </div>
+                <div className="h-10 w-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                  <svg
+                    className="w-5 h-5"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Decorative glassmorphism elements - enhanced */}
+            <div className="absolute -bottom-8 -right-8 w-56 h-56 bg-gradient-to-br from-indigo-500/20 to-purple-600/20 rounded-3xl backdrop-blur-2xl border border-white/10 -z-10 transform transition-transform duration-700 group-hover:scale-110 group-hover:rotate-3"></div>
+
+            <div className="absolute -top-8 -left-8 w-40 h-40 bg-gradient-to-br from-cyan-500/15 to-blue-600/15 rounded-full backdrop-blur-2xl border border-white/10 -z-10 transform transition-transform duration-700 group-hover:scale-110 group-hover:-rotate-3"></div>
+
+            {/* Animated glow effect */}
+            <div className="absolute inset-0 -z-20 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700">
+              <div className="absolute inset-0 bg-gradient-to-r from-indigo-500/30 to-purple-500/30 blur-3xl rounded-3xl"></div>
+            </div>
           </motion.div>
 
           {/* Right - Content */}
@@ -113,7 +159,7 @@ export function About() {
               className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-medium rounded-lg shadow-lg shadow-indigo-500/50 hover:shadow-indigo-500/70 transition-all duration-300"
             >
               <FiDownload className="w-4 h-4" />
-              Download CV
+              <a href="/MohdShoaib_CV.pdf"> Download CV</a>
             </motion.button>
           </motion.div>
         </div>

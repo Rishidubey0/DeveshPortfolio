@@ -5,8 +5,10 @@ import {
   HiPhone,
   HiPaperAirplane,
   HiSparkles,
+  HiCheckCircle,
+  HiXCircle,
 } from "react-icons/hi";
-import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { useState } from "react";
 
 export function Contact() {
@@ -17,25 +19,57 @@ export function Contact() {
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitResult, setSubmitResult] = useState(null); // null | 'success' | 'error'
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setSubmitResult(null);
 
-    // Simulate form submission
-    setTimeout(() => {
-      alert("Message sent successfully! I'll get back to you soon.");
-      setFormData({ name: "", email: "", message: "" });
+    const formDataToSend = new FormData();
+    formDataToSend.append("access_key", "a723f59c-d1be-44a1-b942-a27a15c862c6");
+    formDataToSend.append("name", formData.name);
+    formDataToSend.append("email", formData.email);
+    formDataToSend.append("message", formData.message);
+    // Optional: Add subject line
+    formDataToSend.append("subject", `Portfolio Contact from ${formData.name}`);
+    // Optional: Add redirect after success
+    formDataToSend.append("redirect", "false");
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formDataToSend,
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setSubmitResult("success");
+        setFormData({ name: "", email: "", message: "" });
+
+        // Auto-hide success message after 5 seconds
+        setTimeout(() => {
+          setSubmitResult(null);
+        }, 5000);
+      } else {
+        console.error("Form submission error:", data);
+        setSubmitResult("error");
+      }
+    } catch (error) {
+      console.error("Network error:", error);
+      setSubmitResult("error");
+    } finally {
       setIsSubmitting(false);
-    }, 1000);
+    }
   };
 
   const contactInfo = [
     {
       icon: HiMail,
       label: "Email",
-      value: "contact@mohammadshoaibkhan.com",
-      link: "mailto:contact@mohammadshoaibkhan.com",
+      value: "khanbhaishoaib107@gmail.com",
+      link: "mailto:khanbhaishoaib107@gmail.com",
     },
     {
       icon: HiPhone,
@@ -236,6 +270,7 @@ export function Contact() {
                   </label>
                   <input
                     id="name"
+                    name="name"
                     type="text"
                     placeholder="John Doe"
                     value={formData.name}
@@ -257,6 +292,7 @@ export function Contact() {
                   </label>
                   <input
                     id="email"
+                    name="email"
                     type="email"
                     placeholder="john@example.com"
                     value={formData.email}
@@ -278,6 +314,7 @@ export function Contact() {
                   </label>
                   <textarea
                     id="message"
+                    name="message"
                     placeholder="Tell me about your project..."
                     rows={5}
                     value={formData.message}
@@ -293,9 +330,15 @@ export function Contact() {
                 <motion.button
                   type="submit"
                   disabled={isSubmitting}
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="w-full px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 disabled:from-slate-600 disabled:to-slate-600 text-white font-medium rounded-lg shadow-lg shadow-indigo-500/50 hover:shadow-indigo-500/70 transition-all duration-300 flex items-center justify-center gap-2"
+                  whileHover={{ scale: isSubmitting ? 1 : 1.02 }}
+                  whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
+                  className={`w-full px-6 py-3 ${
+                    submitResult === "success"
+                      ? "bg-gradient-to-r from-emerald-600 to-teal-600"
+                      : submitResult === "error"
+                      ? "bg-gradient-to-r from-red-600 to-rose-600"
+                      : "bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700"
+                  } disabled:from-slate-600 disabled:to-slate-600 text-white font-medium rounded-lg shadow-lg shadow-indigo-500/50 hover:shadow-indigo-500/70 transition-all duration-300 flex items-center justify-center gap-2`}
                 >
                   {isSubmitting ? (
                     <>
@@ -310,6 +353,16 @@ export function Contact() {
                       />
                       Sending...
                     </>
+                  ) : submitResult === "success" ? (
+                    <>
+                      <HiCheckCircle className="w-5 h-5" />
+                      Sent Successfully!
+                    </>
+                  ) : submitResult === "error" ? (
+                    <>
+                      <HiXCircle className="w-5 h-5" />
+                      Failed - Try Again
+                    </>
                   ) : (
                     <>
                       <HiPaperAirplane className="w-5 h-5" />
@@ -317,6 +370,31 @@ export function Contact() {
                     </>
                   )}
                 </motion.button>
+
+                {/* Status Message */}
+                {submitResult === "success" && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="p-4 bg-emerald-500/10 border border-emerald-500/20 rounded-lg"
+                  >
+                    <p className="text-emerald-400 text-sm text-center">
+                      Thank you! I'll get back to you within 24 hours.
+                    </p>
+                  </motion.div>
+                )}
+                {submitResult === "error" && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="p-4 bg-red-500/10 border border-red-500/20 rounded-lg"
+                  >
+                    <p className="text-red-400 text-sm text-center">
+                      Oops! Something went wrong. Please try again or email me
+                      directly.
+                    </p>
+                  </motion.div>
+                )}
               </form>
             </div>
           </motion.div>

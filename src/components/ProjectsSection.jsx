@@ -487,7 +487,10 @@ const AlternatingProjects = ({
   ],
 }) => {
   return (
-    <section id="projects" className="w-full text-white">
+    <section
+      id="projects"
+      className="w-full text-white bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900"
+    >
       <div className="mx-auto max-w-[1200px] px-6 py-16">
         <div className="mb-8">
           <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight">

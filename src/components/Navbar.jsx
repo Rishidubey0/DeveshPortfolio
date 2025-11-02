@@ -1,293 +1,206 @@
-// src/components/Navbar.jsx
-import { useEffect, useRef, useState } from "react";
-import {
-  motion,
-  AnimatePresence,
-  MotionConfig,
-  useScroll,
-  useSpring,
-} from "framer-motion";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+
+import { FaBars, FaTimes } from "react-icons/fa";
 
 const SECTIONS = [
   { id: "home", label: "Home" },
+  { id: "about", label: "About" },
   { id: "skills", label: "Skills" },
   { id: "projects", label: "Projects" },
-
-  { id: "about", label: "About" },
+  { id: "experience", label: "Experience" },
+  { id: "testimonials", label: "Testimonials" },
   { id: "contact", label: "Contact" },
 ];
 
 export default function Navbar() {
-  const [open, setOpen] = useState(false);
-  const [active, setActive] = useState("home");
-  const menuRef = useRef(null);
+  const [scrolled, setScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("home");
+  const [scrollProgress, setScrollProgress] = useState(0);
 
-  // Close on outside click (mobile)
   useEffect(() => {
-    function onDocClick(e) {
-      if (open && menuRef.current && !menuRef.current.contains(e.target))
-        setOpen(false);
-    }
-    document.addEventListener("mousedown", onDocClick);
-    return () => document.removeEventListener("mousedown", onDocClick);
-  }, [open]);
+    const handleScroll = () => {
+      const offset = window.scrollY;
+      setScrolled(offset > 50);
 
-  // Scroll‑spy
-  useEffect(() => {
-    const obs = new IntersectionObserver(
-      (entries) =>
-        entries.forEach((en) => en.isIntersecting && setActive(en.target.id)),
-      { rootMargin: "-40% 0px -55% 0px", threshold: [0, 0.25, 0.5, 0.75, 1] }
-    );
-    SECTIONS.forEach(({ id }) => {
-      const el = document.getElementById(id);
-      if (el) obs.observe(el);
-    });
-    return () => obs.disconnect();
+      // Calculate scroll progress
+      const windowHeight =
+        document.documentElement.scrollHeight -
+        document.documentElement.clientHeight;
+      const progress = (offset / windowHeight) * 100;
+      setScrollProgress(progress);
+
+      // Determine active section
+      const sections = SECTIONS.map((section) => {
+        const element = document.getElementById(section.id);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          return {
+            id: section.id,
+            top: rect.top,
+            bottom: rect.bottom,
+          };
+        }
+        return null;
+      }).filter(Boolean);
+
+      const current = sections.find(
+        (section) => section && section.top <= 100 && section.bottom > 100
+      );
+
+      if (current) {
+        setActiveSection(current.id);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Lock body when menu open
-  useEffect(() => {
-    document.body.style.overflow = open ? "hidden" : "";
-  }, [open]);
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const offset = 80;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - offset;
 
-  // Scroll progress bar (static indigo color to avoid undefined variables)
-  const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, {
-    stiffness: 220,
-    damping: 30,
-    mass: 0.3,
-  });
-
-  const prefersReduced = () =>
-    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const handleNav = (id) => {
-    const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({
-        behavior: prefersReduced() ? "auto" : "smooth",
-        block: "start",
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
       });
-      setOpen(false);
     }
+    setMobileMenuOpen(false);
   };
 
   return (
-    <MotionConfig reducedMotion="user">
-      <header className="fixed inset-x-0 top-0 z-50">
-        <motion.div
-          initial={{ y: -24, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ type: "spring", stiffness: 260, damping: 24 }}
-          className="border-b border-slate-200/60 bg-white/90 backdrop-blur supports-[backdrop-filter]:bg-white/70 shadow-sm dark:border-slate-800/60 dark:bg-slate-950/80"
-        >
-          {/* Scroll progress bar (no hue MotionValue, so no undefined) */}
-          <motion.div
-            style={{ scaleX, transformOrigin: "0% 50%" }}
-            className="h-[2px] w-full bg-indigo-600"
-          />
+    <>
+      {/* Progress Bar */}
+      <motion.div
+        className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 origin-left z-[100]"
+        style={{ scaleX: scrollProgress / 100 }}
+      />
 
-          <nav
-            aria-label="Primary"
-            role="navigation"
-            className="mx-auto flex max-w-[1200px] items-center justify-between px-6 py-3"
-          >
-            {/* Brand */}
-            <a
-              href="#home"
-              className="flex items-center gap-2 focus:outline-none focus-visible:ring ring-indigo-500 rounded"
+      <motion.nav
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.5 }}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+          scrolled
+            ? "bg-slate-900/80 backdrop-blur-xl border-b border-white/10 shadow-xl"
+            : "bg-transparent"
+        }`}
+      >
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-20">
+            {/* Logo */}
+            <motion.button
+              onClick={() => scrollToSection("home")}
+              className="flex items-center gap-2 group"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
-              <motion.span
-                className="inline-grid h-8 w-8 place-items-center rounded bg-indigo-600 text-xs font-semibold text-white"
-                whileHover={{ scale: 1.04 }}
-                whileTap={{ scale: 0.98 }}
-                transition={{ type: "spring", stiffness: 400, damping: 20 }}
-              >
-                MK
-              </motion.span>
-              <span className="text-sm font-semibold tracking-wide text-slate-900 dark:text-slate-100">
-                Mohammad Shoaib Khan
-              </span>
-            </a>
+              <div className="relative">
+                <div className="h-10 w-10 rounded-lg bg-gradient-to-r from-indigo-600 to-purple-600 flex items-center justify-center shadow-lg shadow-indigo-500/50 group-hover:shadow-indigo-500/70 transition-shadow">
+                  <span className="text-white">MK</span>
+                </div>
+              </div>
+              <span className="text-white hidden sm:block">Mohammad Khan</span>
+            </motion.button>
 
-            {/* Desktop links */}
-            <ul
-              className="hidden items-center gap-2 md:flex"
-              role="menubar"
-              aria-label="Primary navigation"
-            >
-              {SECTIONS.map((s) => {
-                const isActive = active === s.id;
-                return (
-                  <li key={s.id} role="none" className="relative">
-                    <button
-                      role="menuitem"
-                      onClick={() => handleNav(s.id)}
-                      className={`px-3 py-2 rounded text-sm font-medium transition-colors focus:outline-none focus-visible:ring ring-indigo-500 ${
-                        isActive
-                          ? "text-indigo-600 dark:text-indigo-400"
-                          : "text-slate-700 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white"
-                      }`}
-                    >
-                      {s.label}
-                    </button>
-                    <AnimatePresence>
-                      {isActive && (
-                        <motion.span
-                          layoutId="nav-underline"
-                          className="absolute left-3 right-3 -bottom-0.5 h-[2px] rounded-full bg-indigo-600 dark:bg-indigo-400"
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          exit={{ opacity: 0 }}
-                          transition={{
-                            type: "spring",
-                            stiffness: 500,
-                            damping: 30,
-                          }}
-                        />
-                      )}
-                    </AnimatePresence>
-                  </li>
-                );
-              })}
-            </ul>
-
-            {/* Right actions */}
-            <div className="hidden md:flex items-center gap-2">
-              <motion.a
-                href="mailto:khanbhaishoaib107@gmail.com"
-                className="px-3 py-2 text-sm rounded border border-slate-300 text-slate-800 hover:border-slate-400 focus:outline-none focus-visible:ring ring-indigo-500 dark:border-slate-600 dark:text-slate-200 dark:hover:border-slate-500"
-                whileHover={{ y: -1 }}
-                whileTap={{ scale: 0.98 }}
-                transition={{ type: "spring", stiffness: 350, damping: 22 }}
-              >
-                Contact
-              </motion.a>
-              <motion.a
-                href="https://www.linkedin.com/in/your-handle"
-                target="_blank"
-                rel="noreferrer"
-                className="px-3 py-2 text-sm rounded bg-indigo-600 text-white hover:bg-indigo-700 focus:outline-none focus-visible:ring ring-indigo-500"
-                whileHover={{ y: -1 }}
-                whileTap={{ scale: 0.98 }}
-                transition={{ type: "spring", stiffness: 350, damping: 22 }}
-              >
-                Resume
-              </motion.a>
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex items-center gap-1">
+              {SECTIONS.map((section) => (
+                <button
+                  key={section.id}
+                  onClick={() => scrollToSection(section.id)}
+                  className="relative px-4 py-2 text-sm text-slate-300 hover:text-white transition-colors"
+                >
+                  {section.label}
+                  {activeSection === section.id && (
+                    <motion.div
+                      layoutId="activeSection"
+                      className="absolute inset-0 bg-white/10 rounded-lg border border-white/20"
+                      transition={{
+                        type: "spring",
+                        stiffness: 380,
+                        damping: 30,
+                      }}
+                    />
+                  )}
+                </button>
+              ))}
             </div>
 
-            {/* Mobile toggle */}
-            <motion.button
-              aria-controls="mobile-menu"
-              aria-expanded={open}
-              aria-label="Toggle menu"
-              onClick={() => setOpen((v) => !v)}
-              className="md:hidden inline-flex items-center justify-center rounded p-2 text-slate-700 hover:bg-slate-100 focus:outline-none focus-visible:ring ring-indigo-500 dark:text-slate-200 dark:hover:bg-slate-800/70"
-              whileTap={{ scale: 0.96 }}
-              transition={{ type: "spring", stiffness: 500, damping: 35 }}
+            {/* CTA Button - Desktop */}
+            <motion.a
+              href="#contact"
+              onClick={(e) => {
+                e.preventDefault();
+                scrollToSection("contact");
+              }}
+              className="hidden md:flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-lg shadow-lg shadow-indigo-500/50 hover:shadow-indigo-500/70 transition-all"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
-              <svg
-                className={`h-6 w-6 ${open ? "hidden" : "block"}`}
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-              >
-                <path
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M4 7h16M4 12h16M4 17h16"
-                />
-              </svg>
-              <svg
-                className={`h-6 w-6 ${open ? "block" : "hidden"}`}
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-              >
-                <path
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
-            </motion.button>
-          </nav>
+              Let's Talk
+            </motion.a>
 
-          {/* Mobile panel */}
-          <AnimatePresence>
-            {open && (
-              <motion.div
-                id="mobile-menu"
-                ref={menuRef}
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: "auto" }}
-                exit={{ opacity: 0, height: 0 }}
-                transition={{ type: "spring", stiffness: 220, damping: 26 }}
-                className="md:hidden overflow-hidden"
-              >
-                <ul
-                  className="space-y-1 px-6 pb-4 pt-2"
-                  role="menu"
-                  aria-label="Mobile navigation"
-                >
-                  {SECTIONS.map((s) => (
-                    <li key={s.id} role="none">
-                      <motion.button
-                        role="menuitem"
-                        onClick={() => handleNav(s.id)}
-                        className={`w-full text-left px-3 py-2 rounded text-sm font-medium focus:outline-none focus-visible:ring ring-indigo-500 ${
-                          active === s.id
-                            ? "bg-indigo-50 text-indigo-700 dark:bg-indigo-950/40 dark:text-indigo-300"
-                            : "text-slate-800 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-800/60"
-                        }`}
-                        whileHover={{ x: 2 }}
-                        whileTap={{ scale: 0.98 }}
-                        transition={{
-                          type: "spring",
-                          stiffness: 400,
-                          damping: 28,
-                        }}
-                      >
-                        {s.label}
-                      </motion.button>
-                    </li>
-                  ))}
+            {/* Mobile Menu Button */}
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="md:hidden p-2 text-white hover:bg-white/10 rounded-lg transition-colors"
+              aria-label="Toggle menu"
+            >
+              {mobileMenuOpen ? (
+                <FaTimes className="w-6 h-6" />
+              ) : (
+                <FaBars className="w-6 h-6" />
+              )}
+            </button>
+          </div>
+        </div>
 
-                  <li
-                    role="none"
-                    className="pt-2 border-t border-slate-200 dark:border-slate-800"
+        {/* Mobile Menu */}
+        <AnimatePresence>
+          {mobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3 }}
+              className="md:hidden border-t border-white/10 bg-slate-900/95 backdrop-blur-xl"
+            >
+              <div className="container mx-auto px-4 py-4 space-y-2">
+                {SECTIONS.map((section) => (
+                  <button
+                    key={section.id}
+                    onClick={() => scrollToSection(section.id)}
+                    className={`w-full text-left px-4 py-3 rounded-lg transition-colors ${
+                      activeSection === section.id
+                        ? "bg-gradient-to-r from-indigo-600/20 to-purple-600/20 text-white border border-indigo-500/50"
+                        : "text-slate-300 hover:bg-white/5 hover:text-white"
+                    }`}
                   >
-                    <motion.a
-                      href="mailto:khanbhaishoaib107@gmail.com"
-                      role="menuitem"
-                      className="block px-3 py-2 text-sm rounded hover:bg-slate-100 focus:outline-none focus-visible:ring ring-indigo-500 dark:hover:bg-slate-800/60"
-                      whileHover={{ x: 2 }}
-                      whileTap={{ scale: 0.98 }}
-                    >
-                      Contact
-                    </motion.a>
-                  </li>
-                  <li role="none">
-                    <motion.a
-                      href="https://www.linkedin.com/in/your-handle"
-                      target="_blank"
-                      rel="noreferrer"
-                      role="menuitem"
-                      className="block px-3 py-2 text-sm rounded bg-indigo-600 text-white hover:bg-indigo-700 focus:outline-none focus-visible:ring ring-indigo-500"
-                      whileHover={{ y: -1 }}
-                      whileTap={{ scale: 0.98 }}
-                    >
-                      Resume
-                    </motion.a>
-                  </li>
-                </ul>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </motion.div>
-      </header>
-    </MotionConfig>
+                    {section.label}
+                  </button>
+                ))}
+                <motion.a
+                  href="#contact"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    scrollToSection("contact");
+                  }}
+                  className="block w-full text-center px-6 py-3 mt-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-lg shadow-lg"
+                  whileTap={{ scale: 0.95 }}
+                >
+                  Let's Talk
+                </motion.a>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </motion.nav>
+    </>
   );
 }

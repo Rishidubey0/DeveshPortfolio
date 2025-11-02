@@ -1,0 +1,224 @@
+import { FaGithub, FaLinkedin, FaTwitter, FaHeart } from "react-icons/fa";
+import { HiMail } from "react-icons/hi";
+import { motion } from "framer-motion";
+
+export function Footer() {
+  const currentYear = new Date().getFullYear();
+
+  const socialLinks = [
+    {
+      icon: FaGithub,
+      label: "GitHub",
+      link: "https://github.com/your-username",
+      color: "hover:bg-gray-700",
+    },
+    {
+      icon: FaLinkedin,
+      label: "LinkedIn",
+      link: "https://www.linkedin.com/in/your-handle",
+      color: "hover:bg-blue-600",
+    },
+    {
+      icon: FaTwitter,
+      label: "Twitter",
+      link: "https://twitter.com/your-handle",
+      color: "hover:bg-sky-500",
+    },
+    {
+      icon: HiMail,
+      label: "Email",
+      link: "mailto:khanbhaishoaib107@gmail.com",
+      color: "hover:bg-red-500",
+    },
+  ];
+
+  const quickLinks = [
+    { label: "Home", link: "#home" },
+    { label: "About", link: "#about" },
+    { label: "Skills", link: "#skills" },
+    { label: "Projects", link: "#projects" },
+    { label: "Experience", link: "#experience" },
+    { label: "Contact", link: "#contact" },
+  ];
+
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId.replace("#", ""));
+    if (element) {
+      const offset = 80;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
+    }
+  };
+
+  return (
+    <footer className="relative bg-gradient-to-b from-slate-900 to-slate-950 text-white py-16 overflow-hidden border-t border-white/5">
+      {/* Decorative gradient orbs */}
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-indigo-500/10 rounded-full blur-[120px]" />
+      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-[120px]" />
+
+      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid md:grid-cols-3 gap-12 mb-12">
+          {/* Brand Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <div className="flex items-center gap-2 mb-4">
+              <div className="h-10 w-10 rounded-lg bg-gradient-to-r from-indigo-600 to-purple-600 flex items-center justify-center shadow-lg shadow-indigo-500/50">
+                <span className="text-white font-semibold">MK</span>
+              </div>
+              <span className="text-white font-semibold text-lg">
+                Mohammad Khan
+              </span>
+            </div>
+            <p className="text-slate-400 text-sm leading-relaxed mb-4">
+              Full-stack MERN developer passionate about building exceptional
+              web experiences and turning ideas into reality.
+            </p>
+            <div className="flex items-center gap-2 text-slate-500 text-xs">
+              <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
+              <span>Available for freelance work</span>
+            </div>
+          </motion.div>
+
+          {/* Quick Links */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+          >
+            <h4 className="text-white font-semibold text-lg mb-4">
+              Quick Links
+            </h4>
+            <ul className="space-y-3">
+              {quickLinks.map((link, index) => (
+                <motion.li
+                  key={index}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.05 }}
+                >
+                  <button
+                    onClick={() => scrollToSection(link.link)}
+                    className="text-slate-400 hover:text-indigo-400 transition-colors inline-flex items-center gap-2 group text-sm"
+                  >
+                    <span className="w-0 h-px bg-indigo-400 group-hover:w-4 transition-all duration-300"></span>
+                    {link.label}
+                  </button>
+                </motion.li>
+              ))}
+            </ul>
+          </motion.div>
+
+          {/* Social Links */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            <h4 className="text-white font-semibold text-lg mb-4">
+              Connect With Me
+            </h4>
+            <p className="text-slate-400 text-sm mb-4">
+              Let's connect and create something amazing together!
+            </p>
+            <div className="flex flex-wrap gap-3">
+              {socialLinks.map((social, index) => (
+                <motion.a
+                  key={index}
+                  href={social.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  initial={{ opacity: 0, scale: 0 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1, type: "spring" }}
+                  whileHover={{ scale: 1.1, y: -5 }}
+                  whileTap={{ scale: 0.95 }}
+                  className={`p-3 bg-white/5 backdrop-blur-lg rounded-lg border border-white/10 ${social.color} hover:border-transparent transition-all shadow-lg group`}
+                  aria-label={social.label}
+                >
+                  <social.icon className="w-5 h-5 text-slate-300 group-hover:text-white transition-colors" />
+                </motion.a>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Divider */}
+        <div className="relative mb-8">
+          <div className="h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
+          <motion.div
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1 }}
+            className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 origin-left"
+          />
+        </div>
+
+        {/* Copyright */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.3 }}
+          className="text-center space-y-2"
+        >
+          <p className="text-slate-400 text-sm">
+            © {currentYear} Mohammad Shoaib Khan. All Rights Reserved.
+          </p>
+          <p className="text-slate-500 text-sm flex items-center justify-center gap-2 flex-wrap">
+            <span>Built with</span>
+            <motion.span
+              animate={{ scale: [1, 1.2, 1] }}
+              transition={{ duration: 1, repeat: Infinity }}
+            >
+              <FaHeart className="w-4 h-4 text-red-400 inline" />
+            </motion.span>
+            <span>using React, Tailwind CSS & Framer Motion</span>
+          </p>
+          <p className="text-slate-600 text-xs mt-2">
+            Designed & Developed by Mohammad Shoaib Khan
+          </p>
+        </motion.div>
+
+        {/* Back to Top Button */}
+        <motion.button
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          onClick={() => scrollToSection("#home")}
+          whileHover={{ y: -5 }}
+          whileTap={{ scale: 0.95 }}
+          className="absolute bottom-8 right-8 p-3 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-lg shadow-lg shadow-indigo-500/50 hover:shadow-indigo-500/70 transition-all group"
+          aria-label="Back to top"
+        >
+          <svg
+            className="w-5 h-5 text-white group-hover:translate-y-[-2px] transition-transform"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M5 10l7-7m0 0l7 7m-7-7v18"
+            />
+          </svg>
+        </motion.button>
+      </div>
+    </footer>
+  );
+}

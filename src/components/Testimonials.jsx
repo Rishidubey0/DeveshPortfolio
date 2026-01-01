@@ -14,7 +14,7 @@ export function Testimonials() {
 
       {/* Animated gradient orbs */}
       <motion.div
-        className="absolute top-40 left-1/4 w-96 h-96 bg-indigo-500/20 rounded-full blur-[120px]"
+        className="absolute top-40 left-1/4 w-96 h-96 bg-indigo-500/20 rounded-full blur-[120px] will-change-transform"
         animate={{
           scale: [1, 1.3, 1],
           opacity: [0.2, 0.4, 0.2],
@@ -22,7 +22,7 @@ export function Testimonials() {
         transition={{ duration: 10, repeat: Infinity }}
       />
       <motion.div
-        className="absolute bottom-20 right-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-[120px]"
+        className="absolute bottom-20 right-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-[120px] will-change-transform"
         animate={{
           scale: [1.3, 1, 1.3],
           opacity: [0.4, 0.2, 0.4],
@@ -76,26 +76,25 @@ export function Testimonials() {
                 <motion.div
                   whileHover={{ y: -8, scale: 1.02 }}
                   transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                  className={`h-full bg-white/5 backdrop-blur-xl border rounded-2xl transition-all duration-300 shadow-xl overflow-hidden relative group ${
-                    activeIndex === index
-                      ? "border-indigo-500/50 shadow-indigo-500/30 bg-white/10"
-                      : "border-white/10 hover:border-indigo-500/30"
-                  }`}
+                  className={`h-full bg-slate-900/50 backdrop-blur-xl border rounded-2xl transition-all duration-300 shadow-xl overflow-hidden relative group ${activeIndex === index
+                    ? "border-indigo-500/50 shadow-indigo-500/30 bg-slate-900/80"
+                    : "border-white/10 hover:border-indigo-500/30"
+                    }`}
                 >
-                  {/* Gradient overlay on hover */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  {/* Fixed Gradient Overlay - Permanent */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/10 to-purple-500/10 opacity-100"></div>
 
                   {/* Card Content */}
-                  <div className="relative p-6 flex flex-col h-full">
+                  <div className="relative p-8 flex flex-col h-full">
                     {/* Quote Icon with background */}
-                    <div className="mb-4">
-                      <div className="inline-flex p-3 bg-gradient-to-br from-indigo-500/20 to-purple-500/20 rounded-xl border border-indigo-500/20">
+                    <div className="mb-6">
+                      <div className="inline-flex p-3 bg-gradient-to-br from-indigo-500/20 to-purple-500/20 rounded-xl border border-indigo-500/20 shadow-inner">
                         <FaQuoteLeft className="w-5 h-5 text-indigo-400" />
                       </div>
                     </div>
 
-                    {/* Star rating with animation */}
-                    <div className="flex gap-1 mb-4">
+                    {/* Star rating */}
+                    <div className="flex gap-1 mb-6">
                       {[...Array(5)].map((_, i) => (
                         <motion.div
                           key={i}
@@ -104,21 +103,21 @@ export function Testimonials() {
                           viewport={{ once: true }}
                           transition={{ delay: index * 0.15 + i * 0.05 }}
                         >
-                          <FaStar className="w-4 h-4 text-yellow-400 drop-shadow-sm" />
+                          <FaStar className="w-4 h-4 text-amber-400 drop-shadow-sm" />
                         </motion.div>
                       ))}
                     </div>
 
                     {/* Testimonial text */}
-                    <p className="text-slate-300 mb-6 italic text-sm leading-relaxed flex-grow">
+                    <p className="text-slate-200 mb-8 italic text-base leading-relaxed flex-grow font-inter tracking-wide">
                       "{testimonial.comment}"
                     </p>
 
                     {/* Author info */}
-                    <div className="flex items-center gap-4 pt-4 border-t border-white/10">
-                      {/* Custom Avatar with better styling */}
+                    <div className="flex items-center gap-4 pt-6 border-t border-white/5">
+                      {/* Custom Avatar */}
                       <div className="relative">
-                        <div className="w-12 h-12 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-lg shadow-indigo-500/30 ring-2 ring-white/10">
+                        <div className="w-12 h-12 rounded-full bg-gradient-to-br from-indigo-600 to-purple-600 flex items-center justify-center shadow-lg shadow-indigo-500/30 ring-2 ring-white/10">
                           <span className="text-white font-semibold text-base">
                             {testimonial.avatar}
                           </span>
@@ -127,7 +126,7 @@ export function Testimonials() {
                         {activeIndex === index && (
                           <motion.div
                             layoutId="activeTestimonial"
-                            className="absolute -top-1 -right-1 w-4 h-4 bg-emerald-400 rounded-full border-2 border-slate-900 shadow-lg"
+                            className="absolute -bottom-1 -right-1 w-4 h-4 bg-emerald-500 rounded-full border-2 border-slate-900 shadow-lg"
                             transition={{
                               type: "spring",
                               stiffness: 300,
@@ -138,21 +137,21 @@ export function Testimonials() {
                       </div>
 
                       <div className="flex-grow min-w-0">
-                        <p className="text-white font-semibold text-sm truncate">
+                        <p className="text-white font-semibold text-sm truncate font-outfit">
                           {testimonial.name}
                         </p>
-                        <p className="text-slate-400 text-xs truncate">
+                        <p className="text-slate-400 text-xs truncate font-inter">
                           {testimonial.position}
                         </p>
-                        <p className="text-slate-500 text-xs truncate">
+                        <p className="text-indigo-400 text-xs truncate font-medium mt-0.5">
                           {testimonial.company}
                         </p>
                       </div>
                     </div>
                   </div>
 
-                  {/* Decorative corner accent */}
-                  <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-indigo-500/10 to-transparent rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  {/* Decorative corner accent - Fixed visibility */}
+                  <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-indigo-500/10 to-transparent rounded-bl-full opacity-100 transition-opacity duration-300"></div>
                 </motion.div>
               </motion.div>
             ))}

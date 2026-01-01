@@ -1,6 +1,5 @@
-import React from "react";
-import { motion } from "framer-motion";
-// npm i react-icons
+import React, { useRef, useState } from "react";
+import { motion, useMotionTemplate, useMotionValue } from "framer-motion";
 import {
   SiMongodb,
   SiExpress,
@@ -8,7 +7,6 @@ import {
   SiNodedotjs,
   SiRedux,
   SiTailwindcss,
-  // Replace SiAmazonaws with specific AWS services that exist in react-icons:
   SiAmazonec2,
   SiAmazons3,
   SiDocker,
@@ -21,340 +19,160 @@ import {
   SiTypescript,
 } from "react-icons/si";
 
-// Then use:
-// <SiAmazonec2 /> and <SiAmazons3 /> instead of <SiAmazonaws />
-
 const container = {
-  hidden: { opacity: 0, y: 16 },
+  hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    y: 0,
     transition: {
-      duration: 0.45,
-      ease: "easeOut",
-      when: "beforeChildren",
-      staggerChildren: 0.08,
+      staggerChildren: 0.1,
     },
   },
 };
 
-const card = {
-  hidden: { opacity: 0, y: 12 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.45 } },
+const itemAnim = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
 };
 
-const Bar = ({ value }) => (
-  <div className="h-2 w-full rounded-full bg-white/10 overflow-hidden">
-    <div
-      className="h-full rounded-full bg-gradient-to-r from-indigo-500 via-fuchsia-500 to-cyan-500"
-      style={{ width: `${value}%` }}
-    />
-  </div>
-);
+function SpotlightItem({ icon: Icon, label, hint, color = "text-slate-300" }) {
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
 
-// Compact item with hover micro-interaction
-const ListItem = ({ icon: Icon, label, hint, color = "text-slate-300" }) => (
-  <motion.div
-    whileHover={{ y: -2, scale: 1.02 }}
-    transition={{ type: "spring", stiffness: 420, damping: 22, mass: 0.5 }}
-    className="flex items-center justify-between rounded-lg border border-white/10 bg-white/5 px-3 py-2 motion-reduce:transform-none"
-  >
-    <div className="flex items-center gap-2">
-      <Icon className={`h-[18px] w-[18px] ${color}`} />
-      <span className="text-[13px] text-slate-200">{label}</span>
-    </div>
-    {hint ? <span className="text-[11px] text-slate-400">{hint}</span> : null}
-  </motion.div>
-);
+  function handleMouseMove({ currentTarget, clientX, clientY }) {
+    const { left, top } = currentTarget.getBoundingClientRect();
+    mouseX.set(clientX - left);
+    mouseY.set(clientY - top);
+  }
+
+  return (
+    <motion.div
+      variants={itemAnim}
+      className="group relative border border-white/10 bg-slate-900/50 overflow-hidden rounded-xl px-4 py-3 hover:border-white/20 transition-colors"
+      onMouseMove={handleMouseMove}
+    >
+      <motion.div
+        className="pointer-events-none absolute -inset-px rounded-xl opacity-0 transition duration-300 group-hover:opacity-100"
+        style={{
+          background: useMotionTemplate`
+            radial-gradient(
+              400px circle at ${mouseX}px ${mouseY}px,
+              rgba(99, 102, 241, 0.15),
+              transparent 80%
+            )
+          `,
+        }}
+      />
+
+      <div className="relative flex items-center justify-between z-10">
+        <div className="flex items-center gap-3">
+          <div className="p-2 bg-white/5 rounded-lg group-hover:bg-white/10 transition-colors">
+            <Icon className={`h-5 w-5 ${color}`} />
+          </div>
+          <div>
+            <div className="text-sm font-medium text-slate-200 group-hover:text-white transition-colors">
+              {label}
+            </div>
+          </div>
+        </div>
+        {hint && (
+          <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-white/5 text-slate-400 border border-white/5">
+            {hint}
+          </span>
+        )}
+      </div>
+    </motion.div>
+  );
+}
 
 const SectionHeader = ({ title, badgeText, badgeTone = "emerald" }) => {
   const tones = {
-    emerald: "bg-emerald-500/18 text-emerald-300 ring-emerald-400/25",
-    indigo: "bg-indigo-500/18 text-indigo-300 ring-indigo-400/25",
-    cyan: "bg-cyan-500/18 text-cyan-300 ring-cyan-400/25",
-    fuchsia: "bg-fuchsia-500/18 text-fuchsia-300 ring-fuchsia-400/25",
+    emerald: "text-emerald-400 bg-emerald-400/10 border-emerald-400/20",
+    indigo: "text-indigo-400 bg-indigo-400/10 border-indigo-400/20",
+    cyan: "text-cyan-400 bg-cyan-400/10 border-cyan-400/20",
+    fuchsia: "text-fuchsia-400 bg-fuchsia-400/10 border-fuchsia-400/20",
   };
   const tone = tones[badgeTone] || tones.emerald;
+
   return (
-    <div className="mb-4">
-      <div className="flex items-center justify-between">
-        <h3 className="text-[17px] font-semibold">{title}</h3>
-        {badgeText ? (
-          <span
-            className={`rounded-full px-2.5 py-1 text-[11px] font-semibold ring-1 ${tone}`}
-          >
-            {badgeText}
-          </span>
-        ) : null}
-      </div>
-      <div className="mt-3 h-px w-full bg-white/10" />
+    <div className="mb-6 flex items-center justify-between">
+      <h3 className="text-lg font-semibold text-white/90">{title}</h3>
+      {badgeText && (
+        <span className={`px-2.5 py-1 rounded-full text-[11px] font-medium border ${tone}`}>
+          {badgeText}
+        </span>
+      )}
     </div>
   );
 };
 
 const SkillsAndTools = () => {
   return (
-    <motion.section
-      variants={container}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.3 }}
-      className="relative w-full text-white"
-      id="skills"
-    >
-      <div className="mx-auto max-w-[1200px] px-6 py-14">
-        {/* Header */}
-        <motion.div variants={card} className="mb-8">
-          <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight">
-            Skills & Tools
+    <section className="relative w-full py-24 overflow-hidden" id="skills">
+      {/* Background Elements */}
+      <div className="absolute inset-0 bg-slate-950" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-indigo-500/5 rounded-full blur-[100px] opacity-50" />
+
+      <div className="relative z-10 mx-auto max-w-[1300px] px-6">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mb-16 text-center"
+        >
+          <h2 className="text-3xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white via-slate-200 to-slate-400 mb-4">
+            Tech Stack & Tools
           </h2>
-          <p className="mt-2 text-[14.5px] leading-6 text-slate-300/90">
-            MERN‑first delivery with dependable deployments across AWS,
-            Hostinger, Render, and Vercel.
+          <p className="text-slate-400 max-w-2xl mx-auto text-lg">
+            A comprehensive toolkit designed for building scalable, high-performance web applications.
           </p>
         </motion.div>
 
-        {/* Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+        <motion.div
+          variants={container}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          className="grid grid-cols-1 md:grid-cols-2 gap-8"
+        >
           {/* MERN Core */}
-          <motion.div
-            variants={card}
-            className="rounded-2xl border border-white/10 bg-white/5 p-5 shadow-lg"
-          >
-            <SectionHeader
-              title="MERN Core"
-              badgeText="Primary"
-              badgeTone="emerald"
-            />
-
-            <div className="grid grid-cols-2 gap-2.5 mb-5">
-              <ListItem
-                icon={SiMongodb}
-                label="MongoDB"
-                color="text-emerald-400"
-              />
-              <ListItem icon={SiExpress} label="Express" />
-              <ListItem icon={SiReact} label="React" color="text-cyan-400" />
-              <ListItem
-                icon={SiNodedotjs}
-                label="Node.js"
-                color="text-green-400"
-              />
-              <ListItem
-                icon={SiRedux}
-                label="Redux / RTK"
-                color="text-fuchsia-400"
-              />
-              <ListItem
-                icon={SiTailwindcss}
-                label="Tailwind"
-                color="text-sky-400"
-              />
+          <div className="rounded-2xl bg-white/[0.02] border border-white/[0.05] p-6 md:p-8 backdrop-blur-sm">
+            <SectionHeader title="MERN Core" badgeText="Primary Stack" badgeTone="emerald" />
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <SpotlightItem icon={SiMongodb} label="MongoDB" color="text-emerald-500" hint="Database" />
+              <SpotlightItem icon={SiExpress} label="Express.js" color="text-slate-200" hint="Backend" />
+              <SpotlightItem icon={SiReact} label="React" color="text-cyan-400" hint="Frontend" />
+              <SpotlightItem icon={SiNodedotjs} label="Node.js" color="text-green-500" hint="Runtime" />
+              <SpotlightItem icon={SiRedux} label="Redux Toolkit" color="text-purple-500" hint="State" />
+              <SpotlightItem icon={SiTailwindcss} label="Tailwind CSS" color="text-sky-400" hint="Style" />
             </div>
+          </div>
 
-            <div className="space-y-3">
-              <div>
-                <div className="mb-1 flex items-center justify-between text-[12px] text-slate-300">
-                  <span>Frontend (React)</span>
-                  <span>90%</span>
-                </div>
-                <Bar value={90} />
-              </div>
-              <div>
-                <div className="mb-1 flex items-center justify-between text-[12px] text-slate-300">
-                  <span>Backend (Node + Express)</span>
-                  <span>88%</span>
-                </div>
-                <Bar value={88} />
-              </div>
-              <div>
-                <div className="mb-1 flex items-center justify-between text-[12px] text-slate-300">
-                  <span>Database (MongoDB)</span>
-                  <span>86%</span>
-                </div>
-                <Bar value={86} />
-              </div>
+          {/* Cloud & Deployment */}
+          <div className="rounded-2xl bg-white/[0.02] border border-white/[0.05] p-6 md:p-8 backdrop-blur-sm">
+            <SectionHeader title="Cloud & DevOps" badgeText="Infrastructure" badgeTone="indigo" />
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <SpotlightItem icon={SiAmazons3} label="AWS S3" color="text-amber-500" hint="Storage" />
+              <SpotlightItem icon={SiDocker} label="Docker" color="text-blue-500" hint="Container" />
+              <SpotlightItem icon={SiVercel} label="Vercel" color="text-white" hint="Deploy" />
+              <SpotlightItem icon={SiHostinger} label="Hostinger" color="text-indigo-400" hint="Hosting" />
+              <SpotlightItem icon={SiRender} label="Render" color="text-cyan-300" hint="PaaS" />
+              <SpotlightItem icon={SiAmazonec2} label="AWS EC2" color="text-orange-500" hint="Compute" />
             </div>
-          </motion.div>
+          </div>
 
-          {/* Platforms & Hosting */}
-          <motion.div
-            variants={card}
-            className="rounded-2xl border border-white/10 bg-white/5 p-5 shadow-lg"
-          >
-            <SectionHeader
-              title="Platforms & Hosting"
-              badgeText="Deploy"
-              badgeTone="indigo"
-            />
-
-            <div className="grid grid-cols-2 gap-2.5 mb-5">
-              <ListItem
-                icon={SiAmazons3}
-                label="AWS"
-                hint="EC2 • S3"
-                color="text-amber-400"
-              />
-              <ListItem
-                icon={SiHostinger}
-                label="Hostinger"
-                hint="Shared • VPS"
-                color="text-purple-400"
-              />
-              <ListItem
-                icon={SiRender}
-                label="Render"
-                hint="Web • DB"
-                color="text-cyan-300"
-              />
-              <ListItem
-                icon={SiVercel}
-                label="Vercel"
-                hint="Next • Edge"
-                color="text-white"
-              />
-              <ListItem
-                icon={SiDocker}
-                label="Docker"
-                hint="Images • Compose"
-                color="text-sky-400"
-              />
+          {/* Tools & Utilities */}
+          <div className="rounded-2xl bg-white/[0.02] border border-white/[0.05] p-6 md:p-8 backdrop-blur-sm md:col-span-2">
+            <SectionHeader title="Tools & Utilities" badgeText="Workflow" badgeTone="fuchsia" />
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
+              <SpotlightItem icon={SiTypescript} label="TypeScript" color="text-blue-400" hint="Learning" />
+              <SpotlightItem icon={SiJsonwebtokens} label="JWT Auth" color="text-pink-500" />
+              <SpotlightItem icon={SiCloudinary} label="Cloudinary" color="text-blue-500" />
+              <SpotlightItem icon={SiPostman} label="Postman" color="text-orange-500" />
             </div>
-
-            <div className="space-y-3">
-              <div>
-                <div className="mb-1 flex items-center justify-between text-[12px] text-slate-300">
-                  <span>Deployment Workflow</span>
-                  <span>85%</span>
-                </div>
-                <Bar value={85} />
-              </div>
-              <div>
-                <div className="mb-1 flex items-center justify-between text-[12px] text-slate-300">
-                  <span>CI/CD & Environments</span>
-                  <span>80%</span>
-                </div>
-                <Bar value={80} />
-              </div>
-            </div>
-          </motion.div>
-
-          {/* APIs & Integrations */}
-          <motion.div
-            variants={card}
-            className="rounded-2xl border border-white/10 bg-white/5 p-5 shadow-lg"
-          >
-            <SectionHeader
-              title="APIs & Integrations"
-              badgeText="Services"
-              badgeTone="cyan"
-            />
-
-            <div className="grid grid-cols-2 gap-2.5 mb-5">
-              <ListItem
-                icon={SiJsonwebtokens}
-                label="JWT / Auth"
-                color="text-amber-300"
-              />
-              <ListItem
-                icon={SiCloudinary}
-                label="Cloudinary"
-                color="text-sky-300"
-              />
-              <ListItem
-                icon={SiPostman}
-                label="Postman / APIs"
-                color="text-orange-400"
-              />
-              <ListItem
-                icon={SiTypescript}
-                label="Type Safety"
-                color="text-blue-400"
-              />
-            </div>
-
-            <div className="space-y-3">
-              <div>
-                <div className="mb-1 flex items-center justify-between text-[12px] text-slate-300">
-                  <span>Auth & Security</span>
-                  <span>84%</span>
-                </div>
-                <Bar value={84} />
-              </div>
-              <div>
-                <div className="mb-1 flex items-center justify-between text-[12px] text-slate-300">
-                  <span>Media & Storage</span>
-                  <span>82%</span>
-                </div>
-                <Bar value={82} />
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Tooling & UX */}
-          <motion.div
-            variants={card}
-            className="rounded-2xl border border-white/10 bg-white/5 p-5 shadow-lg"
-          >
-            <SectionHeader
-              title="Tooling & UX"
-              badgeText="Delivery"
-              badgeTone="fuchsia"
-            />
-
-            <div className="grid grid-cols-2 gap-2.5 mb-5">
-              <ListItem
-                icon={SiPostman}
-                label="API Testing"
-                color="text-orange-400"
-              />
-              <ListItem
-                icon={SiTailwindcss}
-                label="Tailwind UI"
-                color="text-sky-400"
-              />
-              <ListItem
-                icon={SiReact}
-                label="Framer Motion"
-                color="text-cyan-400"
-              />
-              <ListItem
-                icon={SiTypescript}
-                label="TypeScript (in‑progress)"
-                color="text-blue-400"
-              />
-            </div>
-
-            <div className="space-y-3">
-              <div>
-                <div className="mb-1 flex items-center justify-between text-[12px] text-slate-300">
-                  <span>DX & Testing</span>
-                  <span>78%</span>
-                </div>
-                <Bar value={78} />
-              </div>
-              <div>
-                <div className="mb-1 flex items-center justify-between text-[12px] text-slate-300">
-                  <span>UI/UX Delivery</span>
-                  <span>83%</span>
-                </div>
-                <Bar value={83} />
-              </div>
-            </div>
-          </motion.div>
-        </div>
-
-        {/* Confidence legend */}
-        <div className="mt-8 flex items-center gap-3 text-[12px] text-slate-400">
-          <span className="inline-block h-2 w-2 rounded-full bg-emerald-400" />
-          <span>High</span>
-          <span className="inline-block h-2 w-2 rounded-full bg-indigo-400 ml-4" />
-          <span>Strong</span>
-          <span className="inline-block h-2 w-2 rounded-full bg-slate-400 ml-4" />
-          <span>Working</span>
-        </div>
+          </div>
+        </motion.div>
       </div>
-    </motion.section>
+    </section>
   );
 };
 

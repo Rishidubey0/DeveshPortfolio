@@ -1,23 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <!-- Background gradient -->
-  <defs>
-    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#6366F1;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#8B5CF6;stop-opacity:1" />
-    </linearGradient>
-    <linearGradient id="textGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#FFFFFF;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#E0E7FF;stop-opacity:1" />
-    </linearGradient>
-  </defs>
-  
-  <!-- Rounded rectangle background -->
-  <rect width="100" height="100" rx="20" fill="url(#bgGrad)"/>
-  
-  <!-- MK text -->
-  <text x="50" y="65" font-family="Arial, sans-serif" font-size="45" font-weight="bold" text-anchor="middle" fill="url(#textGrad)">MK</text>
-  
-  <!-- Subtle code brackets decoration -->
-  <text x="15" y="30" font-family="monospace" font-size="20" fill="#FFFFFF" opacity="0.4">&lt;</text>
-  <text x="78" y="30" font-family="monospace" font-size="20" fill="#FFFFFF" opacity="0.4">/&gt;</text>
+<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="16" height="16" rx="4" fill="url(#paint0_linear_1_2)"/>
+<path d="M7.45703 8.08984C7.45703 8.73307 7.33333 9.27083 7.08594 9.70312C6.84115 10.1328 6.48568 10.457 6.01953 10.6758C5.55339 10.8919 4.99219 11 4.33594 11H2.71875V5.28906H4.51172C5.11068 5.28906 5.63021 5.39583 6.07031 5.60938C6.51042 5.82031 6.85156 6.13411 7.09375 6.55078C7.33594 6.96484 7.45703 7.47786 7.45703 8.08984ZM6.19922 8.12109C6.19922 7.69922 6.13672 7.35286 6.01172 7.08203C5.88932 6.80859 5.70703 6.60677 5.46484 6.47656C5.22526 6.34635 4.92839 6.28125 4.57422 6.28125H3.92969V10H4.44922C5.04036 10 5.47917 9.84245 5.76562 9.52734C6.05469 9.21224 6.19922 8.74349 6.19922 8.12109ZM13.3789 8.08984C13.3789 8.73307 13.2552 9.27083 13.0078 9.70312C12.763 10.1328 12.4076 10.457 11.9414 10.6758C11.4753 10.8919 10.9141 11 10.2578 11H8.64062V5.28906H10.4336C11.0326 5.28906 11.5521 5.39583 11.9922 5.60938C12.4323 5.82031 12.7734 6.13411 13.0156 6.55078C13.2578 6.96484 13.3789 7.47786 13.3789 8.08984ZM12.1211 8.12109C12.1211 7.69922 12.0586 7.35286 11.9336 7.08203C11.8112 6.80859 11.6289 6.60677 11.3867 6.47656C11.1471 6.34635 10.8503 6.28125 10.4961 6.28125H9.85156V10H10.3711C10.9622 10 11.401 9.84245 11.6875 9.52734C11.9766 9.21224 12.1211 8.74349 12.1211 8.12109Z" fill="white"/>
+<defs>
+<linearGradient id="paint0_linear_1_2" x1="-1" y1="-1.5" x2="16.5" y2="18" gradientUnits="userSpaceOnUse">
+<stop stop-color="#F3B443"/>
+<stop offset="1" stop-color="#EE6F43"/>
+</linearGradient>
+</defs>
 </svg>

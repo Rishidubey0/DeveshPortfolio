@@ -50,13 +50,13 @@ export default function FixedBackgroundAnimation() {
     <div className="fixed inset-0 -z-10 overflow-hidden bg-gradient-to-b from-slate-950 via-slate-900 to-slate-800 dark:from-slate-950 dark:via-slate-950 dark:to-slate-900">
       {/* Nebula Blurs */}
       <motion.div
-        className="absolute w-[600px] h-[600px] rounded-full blur-[180px] bg-indigo-600/15 dark:bg-indigo-500/15"
+        className="absolute w-[600px] h-[600px] rounded-full blur-[180px] bg-indigo-600/15 dark:bg-indigo-500/15 will-change-transform"
         style={{ top: "30%", left: "10%" }}
         animate={{ opacity: [0.1, 0.22, 0.1] }}
         transition={{ duration: 20, repeat: Infinity }}
       />
       <motion.div
-        className="absolute w-[500px] h-[500px] rounded-full blur-[160px] bg-sky-500/15 dark:bg-sky-400/15"
+        className="absolute w-[500px] h-[500px] rounded-full blur-[160px] bg-sky-500/15 dark:bg-sky-400/15 will-change-transform"
         style={{ top: "60%", left: "70%" }}
         animate={{ opacity: [0.12, 0.24, 0.12] }}
         transition={{ duration: 18, repeat: Infinity }}
@@ -64,7 +64,7 @@ export default function FixedBackgroundAnimation() {
 
       {/* Glowing Core */}
       <motion.div
-        className="absolute top-1/2 left-1/2 w-80 h-80 rounded-full blur-3xl bg-indigo-400/25 dark:bg-indigo-400/20"
+        className="absolute top-1/2 left-1/2 w-80 h-80 rounded-full blur-3xl bg-indigo-400/25 dark:bg-indigo-400/20 will-change-transform"
         style={{ transform: "translate(-50%, -50%)" }}
         animate={{ scale: [1, 1.08, 1], opacity: [0.15, 0.28, 0.15] }}
         transition={{ duration: 6, repeat: Infinity }}

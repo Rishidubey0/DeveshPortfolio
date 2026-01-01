@@ -10,13 +10,13 @@ export function About() {
   ];
 
   return (
-    <section id="about" className="relative py-24 overflow-hidden">
+    <section id="about" className="relative py-32 lg:py-24 overflow-hidden">
       {/* Gradient background */}
       <div className="absolute inset-0 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900" />
 
       {/* Animated gradient orbs */}
       <motion.div
-        className="absolute top-20 left-10 w-96 h-96 bg-indigo-500/20 rounded-full blur-[120px]"
+        className="absolute top-20 left-10 w-96 h-96 bg-indigo-500/20 rounded-full blur-[120px] will-change-transform"
         animate={{
           scale: [1, 1.2, 1],
           opacity: [0.3, 0.5, 0.3],
@@ -24,7 +24,7 @@ export function About() {
         transition={{ duration: 8, repeat: Infinity }}
       />
       <motion.div
-        className="absolute bottom-20 right-10 w-96 h-96 bg-purple-500/20 rounded-full blur-[120px]"
+        className="absolute bottom-20 right-10 w-96 h-96 bg-purple-500/20 rounded-full blur-[120px] will-change-transform"
         animate={{
           scale: [1.2, 1, 1.2],
           opacity: [0.5, 0.3, 0.5],
@@ -32,7 +32,7 @@ export function About() {
         transition={{ duration: 8, repeat: Infinity }}
       />
 
-      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative z-10 mx-auto max-w-[1300px] px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -62,44 +62,30 @@ export function About() {
               />
 
               {/* Multi-layer gradient overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-indigo-950/60 via-purple-900/20 to-transparent rounded-3xl"></div>
-              <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-indigo-900/30 rounded-3xl"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent"></div>
 
-              {/* Subtle inner glow */}
-              <div className="absolute inset-0 rounded-3xl ring-1 ring-inset ring-white/10"></div>
+              {/* Bottom Info Badge */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4, duration: 0.6 }}
+                className="absolute bottom-4 left-4 right-4 bg-gradient-to-r from-indigo-600/90 to-purple-600/90 backdrop-blur-md rounded-2xl p-4 border border-white/20 shadow-lg"
+              >
+                <div className="flex items-center justify-between text-white">
+                  <div>
+                    <p className="text-sm font-bold text-white">
+                      Full Stack Developer
+                    </p>
+                    <p className="text-[11px] text-indigo-100 mt-0.5 tracking-wide">
+                      MERN Stack Specialist
+                    </p>
+                  </div>
+                  <div className="h-8 w-8 rounded-full bg-white/20 flex items-center justify-center backdrop-blur-sm">
+                    <FiCheckCircle className="w-4 h-4 text-white" />
+                  </div>
+                </div>
+              </motion.div>
             </div>
-
-            {/* Floating Info Badge */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.6 }}
-              className="absolute -bottom-4 left-6 right-6 bg-gradient-to-r from-indigo-600/90 to-purple-600/90 backdrop-blur-xl rounded-2xl p-4 border border-white/20 shadow-xl"
-            >
-              <div className="flex items-center justify-between text-white">
-                <div>
-                  <p className="text-sm font-medium opacity-90">
-                    Full Stack Developer
-                  </p>
-                  <p className="text-xs opacity-70 mt-0.5">
-                    MERN Stack Specialist
-                  </p>
-                </div>
-                <div className="h-10 w-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
-                  <svg
-                    className="w-5 h-5"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </div>
-              </div>
-            </motion.div>
 
             {/* Decorative glassmorphism elements - enhanced */}
             <div className="absolute -bottom-8 -right-8 w-56 h-56 bg-gradient-to-br from-indigo-500/20 to-purple-600/20 rounded-3xl backdrop-blur-2xl border border-white/10 -z-10 transform transition-transform duration-700 group-hover:scale-110 group-hover:rotate-3"></div>

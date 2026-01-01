@@ -58,25 +58,27 @@ export const experiences = [
   {
     id: 1,
     title: "Full Stack Developer",
-    company: "Anarish Innovations",
+    company: "Active Paisa",
+    website: "https://activpaisa.com/",
     duration: "Nov 2025 - Present",
     responsibilities: [
-      "Leading full-stack web application development using modern technologies",
-      "Managing and maintaining server infrastructure and API integrations",
-      "Implementing security protocols, data backup systems, and performance optimization",
-      "Collaborating with the design and product teams to deliver scalable solutions"
+      "Architecting scalable fintech platform (10k+ daily txns) using React & Node.js",
+      "Reduced API response times by 40% via MongoDB query optimization",
+      "Integrated Payment Gateways & KYC APIs to streamline user onboarding",
+      "Led migration from monolithic to microservices architecture"
     ]
   },
   {
     id: 2,
     title: "Full Stack Developer",
     company: "Loanyfy.com",
+    website: "https://loanyfy.com",
     duration: "June 2024 - Nov 2025",
     responsibilities: [
-      "Developed and maintained responsive web applications using the MERN stack",
-      "Collaborated with cross-functional teams to design and deliver new features",
-      "Implemented user authentication, API integrations, and data management modules",
-      "Contributed to enhancing UI/UX for improved user engagement"
+      "Built comprehensive MERN loan management system with real-time tracking",
+      "Designed interactive admin dashboards using Chart.js & React",
+      "Implemented secure JWT auth & RBAC (Role-Based Access Control)",
+      "Revamped UI/UX leading to 25% increase in user retention"
     ]
   }
 ];
@@ -84,26 +86,26 @@ export const experiences = [
 export const testimonials = [
   {
     id: 1,
-    name: "Sarah Johnson",
-    position: "Product Manager",
-    company: "Tech Solutions Inc.",
+    name: "Gokul Nath",
+    position: "CEO",
+    company: "Digital Polska Tech",
     comment: "Mohammad is an exceptional developer who delivers high-quality work on time. His expertise in the MERN stack is impressive.",
-    avatar: "SJ"
+    avatar: "GN"
   },
   {
     id: 2,
-    name: "Ahmed Ali",
-    position: "Team Lead",
-    company: "Digital Ventures",
+    name: "Manish",
+    position: "CEO ",
+    company: "Party Puffers ",
     comment: "Working with Mohammad was a great experience. He's professional, skilled, and always willing to go the extra mile.",
-    avatar: "AA"
+    avatar: "M"
   },
   {
     id: 3,
-    name: "Emily Chen",
-    position: "CEO",
-    company: "StartupHub",
+    name: "Mohammd Amir",
+    position: "Lead",
+    company: "Alras Cars",
     comment: "Mohammad built our entire web platform from scratch. The result exceeded our expectations in every way.",
-    avatar: "EC"
+    avatar: "MA"
   }
 ];

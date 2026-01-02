@@ -10,20 +10,20 @@ export function Footer() {
     {
       icon: FaGithub,
       label: "GitHub",
-      link: "https://github.com/mohdshoaibkhan72",
+      link: "https://github.com/Rishidubey0",
       color: "hover:bg-gray-700",
     },
     {
       icon: FaLinkedin,
       label: "LinkedIn",
-      link: "https://www.linkedin.com/in/shoaibkhan72/",
+      link: "https://www.linkedin.com/in/devesh0/",
       color: "hover:bg-blue-600",
     },
 
     {
       icon: HiMail,
       label: "Email",
-      link: "mailto:contact@mohammadshoaibkhan.com",
+      link: "mailto:rishidubey@gmail.com",
       color: "hover:bg-red-500",
     },
   ];

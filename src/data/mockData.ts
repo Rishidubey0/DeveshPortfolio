@@ -57,28 +57,28 @@ export const projects = [
 export const experiences = [
   {
     id: 1,
-    title: "Full Stack Developer",
-    company: "Active Paisa",
-    website: "https://activpaisa.com/",
-    duration: "Nov 2025 - Present",
+    title: "Frontend Developer & UI/UX Designer",
+    company: "Mobilise App Lab",
+    website: "https://mobilise.co.in/",
+    duration: "jan 2025 - Present",
     responsibilities: [
-      "Architecting scalable fintech platform (10k+ daily txns) using React & Node.js",
-      "Reduced API response times by 40% via MongoDB query optimization",
-      "Integrated Payment Gateways & KYC APIs to streamline user onboarding",
-      "Led migration from monolithic to microservices architecture"
+      "Working as a Frontend & UI/UX Developer on modern web applications",
+      "Building scalable, responsive interfaces using React.js & Angular",
+      "Converting Figma/UI designs into clean, pixel-perfect frontend components",
+      "Improving user experience through optimized layouts, smooth interactions, and accessibility"
     ]
   },
   {
     id: 2,
-    title: "Full Stack Developer",
-    company: "Loanyfy.com",
-    website: "https://loanyfy.com",
-    duration: "June 2024 - Nov 2025",
+    title: "Frontend Developer & UI/UX Designer Intern",
+    company: "Mobilise App Lab",
+    website: "https://mobilise.co.in/",
+    duration: "Jul 2024 - Dec 2025",
     responsibilities: [
-      "Built comprehensive MERN loan management system with real-time tracking",
-      "Designed interactive admin dashboards using Chart.js & React",
-      "Implemented secure JWT auth & RBAC (Role-Based Access Control)",
-      "Revamped UI/UX leading to 25% increase in user retention"
+      "Worked as a Frontend & UI/UX Developer Intern on production-level projects",
+      "Designed and developed responsive UI using React.js & Angular",
+      "Assisted in creating user-friendly UX flows and improving existing UI screens",
+      "Gained hands-on experience in UI/UX best practices and component-based development"
     ]
   }
 ];

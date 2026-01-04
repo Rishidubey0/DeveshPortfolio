@@ -10,7 +10,7 @@ import { experiences } from "../data/mockData";
 
 export function Experience() {
   // Calculate total years of experience
-  const totalYears = experiences.length > 0 ? "3+" : "0";
+  const totalYears = experiences.length > 0 ? "2+" : "0";
   const totalProjects = experiences.reduce(
     (acc, exp) => acc + (exp.responsibilities?.length || 0),
     0
@@ -102,7 +102,9 @@ export function Experience() {
                       <p className="text-2xl font-bold text-white font-outfit">
                         {experiences.length}
                       </p>
-                      <p className="text-slate-400 text-sm font-inter">Companies</p>
+                      <p className="text-slate-400 text-sm font-inter">
+                        Companies
+                      </p>
                     </div>
                   </div>
 
@@ -111,8 +113,12 @@ export function Experience() {
                       <FiTrendingUp className="w-6 h-6" />
                     </div>
                     <div>
-                      <p className="text-2xl font-bold text-white font-outfit">12+</p>
-                      <p className="text-slate-400 text-sm font-inter">Key Projects</p>
+                      <p className="text-2xl font-bold text-white font-outfit">
+                        20+
+                      </p>
+                      <p className="text-slate-400 text-sm font-inter">
+                        Key Projects
+                      </p>
                     </div>
                   </div>
                 </div>

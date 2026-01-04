@@ -71,11 +71,13 @@ export function Footer() {
           >
             <div className="flex items-center gap-3 mb-6">
               <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-indigo-600 to-purple-700 flex items-center justify-center shadow-lg shadow-indigo-500/30 ring-1 ring-white/20">
-                <span className="text-white font-bold text-xl font-outfit tracking-tight">MK</span>
+                <span className="text-white font-bold text-xl font-outfit tracking-tight">
+                  DD
+                </span>
               </div>
               <div>
                 <span className="block text-white font-bold text-xl font-outfit tracking-wide">
-                  Mohammad Khan
+                  Devesh Dubey
                 </span>
                 <span className="text-indigo-400 text-xs font-semibold tracking-wider uppercase">
                   Portfolio
@@ -83,8 +85,9 @@ export function Footer() {
               </div>
             </div>
             <p className="text-slate-400 text-sm leading-relaxed mb-6 max-w-sm font-inter">
-              Full-stack MERN developer passionate about building exceptional
-              web experiences and turning ideas into reality.
+              Frontend Developer and UI/UX Designer passionate about crafting
+              intuitive, responsive web interfaces using Angular and React, and
+              transforming ideas into engaging digital experiences.
             </p>
             <div className="flex items-center gap-3 text-emerald-300 text-xs font-semibold bg-emerald-900/20 px-4 py-2 rounded-full w-fit border border-emerald-500/20 shadow-sm shadow-emerald-500/10">
               <div className="relative flex h-2 w-2">
@@ -177,7 +180,8 @@ export function Footer() {
           className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm font-inter"
         >
           <p className="text-slate-400 text-center md:text-left">
-            © {currentYear} Mohammad Shoaib Khan. <span className="hidden sm:inline">|</span> All Rights Reserved.
+            © {currentYear} Devesh Kumar Dubey.{" "}
+            <span className="hidden sm:inline">|</span> All Rights Reserved.
           </p>
           <p className="text-slate-500 flex items-center gap-1.5">
             Built with

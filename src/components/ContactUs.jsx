@@ -27,7 +27,7 @@ export function Contact() {
     setSubmitResult(null);
 
     const formDataToSend = new FormData();
-    formDataToSend.append("access_key", "a723f59c-d1be-44a1-b942-a27a15c862c6");
+    formDataToSend.append("access_key", "106cb255-0c95-4601-ba99-667b50445398");
     formDataToSend.append("name", formData.name);
     formDataToSend.append("email", formData.email);
     formDataToSend.append("message", formData.message);

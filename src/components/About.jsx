@@ -56,8 +56,8 @@ export function About() {
             {/* Main Image Container */}
             <div className="relative rounded-3xl overflow-hidden border border-white/20 backdrop-blur-xl bg-gradient-to-br from-white/10 to-white/5 shadow-2xl">
               <img
-                src="/aiimg1.png"
-                alt="Mohammad Shoaib Khan - Full Stack Developer"
+                src="/Devesh.jpeg"
+                alt="Devesh Dubey - Front End Developer & Ui/Ux Designer"
                 className="w-full h-auto rounded-3xl transform transition-transform duration-700 group-hover:scale-105"
               />
 
@@ -74,10 +74,10 @@ export function About() {
                 <div className="flex items-center justify-between text-white">
                   <div>
                     <p className="text-sm font-bold text-white">
-                      Full Stack Developer
+                      Front End Developer
                     </p>
                     <p className="text-[11px] text-indigo-100 mt-0.5 tracking-wide">
-                      MERN Stack Specialist
+                      Ui/Ux Designer
                     </p>
                   </div>
                   <div className="h-8 w-8 rounded-full bg-white/20 flex items-center justify-center backdrop-blur-sm">
@@ -110,16 +110,17 @@ export function About() {
               Passionate Developer, Creative Problem Solver
             </h3>
             <p className="mb-6 text-slate-300 text-base leading-relaxed">
-              I'm a passionate MERN Stack Developer with experience building
-              responsive web applications using MongoDB, Express, React, and
-              Node.js. I focus on clean code, UI/UX, and seamless backend
-              integration.
+              I'm a passionate Frontend & UI/UX Developer with experience
+              building responsive and user-friendly web applications using React
+              and Angular. I focus on clean, scalable code, intuitive UI/UX
+              design, and delivering smooth, high-performance user experiences.
             </p>
             <p className="mb-8 text-slate-300 text-base leading-relaxed">
-              My journey in web development has equipped me with the skills to
-              transform ideas into functional, scalable applications. I believe
-              in continuous learning and staying updated with the latest
-              technologies.
+              My journey in frontend and UI/UX development has equipped me with
+              the skills to transform ideas into clean, scalable, and
+              user-friendly web interfaces. I strongly believe in continuous
+              learning and staying updated with the latest frontend technologies
+              and design trends.
             </p>
 
             {/* Highlights */}
@@ -140,7 +141,7 @@ export function About() {
             </div>
 
             {/* Download CV Button - Fixed */}
-            <a href="/MohdShoaib_CV.pdf" download className="inline-block">
+            <a href="/deveshDubey_software_developer.pdf" download className="inline-block">
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}

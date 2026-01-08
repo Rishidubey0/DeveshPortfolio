@@ -92,7 +92,7 @@ const LandingPage = () => {
                 variants={fadeUp}
                 className="mb-6 text-4xl sm:text-5xl md:text-6xl lg:text-5xl xl:text-6xl font-bold tracking-tight text-white font-outfit leading-[1.1]"
               >
-                {/* I’m Devesh Dubey */}
+                I’m Devesh Dubey 
                 <br className="hidden sm:block" />
                 <span className="bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
                   Front-End Developer & Ui/UX Designer

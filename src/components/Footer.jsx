@@ -191,7 +191,7 @@ export function Footer() {
             >
               <FaHeart className="w-3.5 h-3.5 text-rose-500 drop-shadow-[0_0_8px_rgba(244,63,94,0.5)]" />
             </motion.span>
-            via React & Tailwind
+            
           </p>
         </motion.div>
 
